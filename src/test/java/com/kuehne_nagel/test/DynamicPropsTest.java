@@ -5,8 +5,6 @@ import com.kuehne_nagel.test.util.TestDynamicPropsProvider;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.text.ParseException;
-
 import static com.kuehne_nagel.app.props.DynamicProps.getDynamicValue;
 import static com.kuehne_nagel.app.props.DynamicProps.isDynamicProp;
 import static org.junit.jupiter.api.Assertions.*;
@@ -39,7 +37,7 @@ class DynamicPropsTest {
 
     @Test
     @DisplayName("getDynamicValue returns value for an implemented property")
-    void getDynamicValueWithImplementedProp() throws CantFindDynamicPropertyException, ParseException {
+    void getDynamicValueWithImplementedProp() throws CantFindDynamicPropertyException {
         assertEquals("dyn_param_time", getDynamicValue("<CURRENT_DATETIME>", new TestDynamicPropsProvider()));
     }
 
