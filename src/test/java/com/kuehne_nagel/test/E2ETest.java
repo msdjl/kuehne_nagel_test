@@ -1,20 +1,14 @@
 package com.kuehne_nagel.test;
 
 import com.kuehne_nagel.app.Application;
-import com.kuehne_nagel.app.props.Props;
-import com.kuehne_nagel.test.util.TestDynamicPropsProvider;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.w3c.dom.Element;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Date;
-import java.util.Objects;
 
 import static com.kuehne_nagel.app.xml.XMLIO.getXMLString;
 import static com.kuehne_nagel.app.xml.XMLIO.loadXML;
-import static com.kuehne_nagel.app.xml.XMLProcessor.processPlaceholders;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class E2ETest extends TestBase {
