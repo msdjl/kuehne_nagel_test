@@ -1,5 +1,6 @@
 package com.kuehne_nagel.app;
 
+import com.kuehne_nagel.app.props.DynamicPropsProvider;
 import com.kuehne_nagel.app.props.Props;
 import org.w3c.dom.Element;
 import picocli.CommandLine;
@@ -26,11 +27,10 @@ public class Application implements Runnable {
 
     public void run() {
         try {
-            Props props = new Props(properties);
+            Props props = new Props(properties, new DynamicPropsProvider());
             Element root = loadXML(input);
             processPlaceholders(root, props);
             saveXML(root, output);
-            //printXML(root);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

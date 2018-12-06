@@ -2,6 +2,7 @@ package com.kuehne_nagel.app.xml;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -13,15 +14,26 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import java.io.File;
-import java.io.IOException;
-import java.io.StringWriter;
+import java.io.*;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class XMLIO {
     public static Element loadXML(File file) throws ParserConfigurationException, IOException, SAXException {
+        InputStream inputStream = new FileInputStream(file);
+        Reader reader = new InputStreamReader(inputStream, UTF_8);
+        return loadXML(new InputSource(reader));
+    }
+
+    public static Element loadXML(String str) throws ParserConfigurationException, IOException, SAXException {
+        Reader reader = new StringReader(str);
+        return loadXML(new InputSource(reader));
+    }
+
+    public static Element loadXML(InputSource source) throws ParserConfigurationException, IOException, SAXException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
-        Document document = builder.parse(file);
+        Document document = builder.parse(source);
         document.getDocumentElement().normalize();
         return document.getDocumentElement();
     }

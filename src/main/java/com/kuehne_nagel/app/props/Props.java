@@ -11,9 +11,11 @@ import java.util.Properties;
 
 public class Props {
     private Properties props = new Properties();
+    private IDynamicPropsProvider propsProvider;
 
-    public Props(File file) throws IOException {
+    public Props(File file, IDynamicPropsProvider propsProvider) throws IOException {
         loadProperties(file);
+        this.propsProvider = propsProvider;
     }
 
     public String getProperty(String name) throws CantFindDynamicPropertyException, CantFindPropertyException {
@@ -25,7 +27,7 @@ public class Props {
 
         String propValue = removeQuotes(rawPropertyValue);
         if (DynamicProps.isDynamicProp(propValue))
-            return DynamicProps.getDynamicValue(propValue);
+            return DynamicProps.getDynamicValue(propValue, propsProvider);
         return propValue;
     }
 
