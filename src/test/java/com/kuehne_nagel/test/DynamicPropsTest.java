@@ -9,7 +9,7 @@ import static com.kuehne_nagel.app.props.DynamicProps.getDynamicValue;
 import static com.kuehne_nagel.app.props.DynamicProps.isDynamicProp;
 import static org.junit.jupiter.api.Assertions.*;
 
-class DynamicPropsTest {
+class DynamicPropsTest extends TestBase {
     @Test
     @DisplayName("isDynamicProp returns true for a string with triangle brackets")
     void isDynamicPropWithValueInBrackets() {

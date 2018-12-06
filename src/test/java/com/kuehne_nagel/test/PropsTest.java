@@ -12,12 +12,11 @@ import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class PropsTest {
+class PropsTest extends TestBase {
     Props props;
 
     PropsTest() throws IOException {
-        ClassLoader classLoader = getClass().getClassLoader();
-        File propsFile = new File(classLoader.getResource("example.properties").getFile());
+        File propsFile = getResourceFile("example.properties");
         props = new Props(propsFile, new TestDynamicPropsProvider());
     }
 

@@ -14,13 +14,11 @@ import static com.kuehne_nagel.app.xml.XMLIO.loadXML;
 import static com.kuehne_nagel.app.xml.XMLProcessor.processPlaceholders;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class XMLProcessorTest {
+class XMLProcessorTest extends TestBase {
     Props props;
-    ClassLoader classLoader;
 
     XMLProcessorTest() throws IOException {
-        classLoader = getClass().getClassLoader();
-        File propsFile = new File(classLoader.getResource("example.properties").getFile());
+        File propsFile = getResourceFile("example.properties");
         props = new Props(propsFile, new TestDynamicPropsProvider());
     }
 
@@ -50,12 +48,12 @@ class XMLProcessorTest {
     @Test
     @DisplayName("process complex xml")
     void complexXML() throws Exception {
-        File inputFile = new File(classLoader.getResource("input.xml").getFile());
+        File inputFile = getResourceFile("input.xml");
         Element root = loadXML(inputFile);
         processPlaceholders(root, props);
         String actualResult = getXMLString(root);
 
-        File outputFile = new File(classLoader.getResource("output.xml").getFile());
+        File outputFile = getResourceFile("output.xml");
         String expectedResult = getXMLString(loadXML(outputFile));
 
         assertEquals(expectedResult, actualResult);
